@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.ataf.entities">
+    <class name="User" table="LOGIN_USER">
+        <meta attribute="class-description">
+			This class contains the user detail. 
+		</meta>
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+        <property name="alias" column="ALIAS" />
+        <property name="password" column="PASSWORD" />
+        <property name="email" column="EMAIL" />
+        <property name="name" column="NAME" />
+        <property name="surname" column="SURNAME" />
+        <property name="active" column="ACTIVE" />
+        <set name="roles" cascade="save-update" table="USER_ROLE" fetch="select" lazy="true">
+			<key>
+				<column name="ID_USER" not-null="false" />
+			</key>
+			<many-to-many entity-name="org.ataf.entities.Role">
+				<column name="ID_ROLE" not-null="false" />
+			</many-to-many>
+		</set>
+    </class>
+</hibernate-mapping>

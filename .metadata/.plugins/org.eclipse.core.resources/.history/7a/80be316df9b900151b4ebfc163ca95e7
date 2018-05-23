@@ -1,0 +1,276 @@
+/**
+ * 
+ */
+package org.ataf.actions;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+
+import org.ataf.entities.Referee;
+import org.ataf.entities.Season;
+import org.ataf.persistence.dao.interfaces.RefereeDAO;
+import org.ataf.persistence.dao.interfaces.SeasonDAO;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
+/**
+ * @author javier.paris
+ */
+public class RefereeAction extends ActionSupport {
+	private static final long serialVersionUID = -62996028722708621L;
+	
+	// Estáticos
+	private static final Logger LOGGER = LoggerFactory.getLogger(RefereeAction.class);
+	private static final String SUCCESS = "SUCCESS";
+	private static final String ERROR = "ERROR";
+	private static final String CLASS_CAN_WRITE = "personalDataDiv";
+	private static final String CLASS_READ_ONLY = "personalDataDivReadOnly";
+	
+	// DAOs
+	private RefereeDAO refereeDAO;
+	private SeasonDAO seasonDAO;
+	
+	// Listados y objetos	
+	private Referee referee;
+	private List<Referee> refereeList;
+	private List<Season> seasonsList;
+	
+	/**
+	 * Palabra a buscar en el formulario de búsqueda
+	 */
+	private String refereeSearchText;
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public String getRefereeListFunction() throws Exception {
+		LOGGER.debug("Execute RefereeAction");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		this.refereeList = new ArrayList<Referee>();
+		
+		try {
+			if (null != this.refereeSearchText && !("".equalsIgnoreCase(this.refereeSearchText.trim()))) {
+				this.refereeList = refereeDAO.getRefereeList(refereeSearchText);
+			} else {
+				this.refereeList = refereeDAO.getRefereeList();			
+			}
+			if (this.refereeList.size() == 0) {
+				this.refereeList = null;
+			}
+			// HttpSession session = ServletActionContext.getRequest().getSession();
+			// session.setAttribute("logined","true");
+			// session.setAttribute("context", new Date());
+			// Better is using ActionContext 
+        	session.put("context", new Date());
+        	session.remove("activeLink");
+        	session.put("activeLink", "REFEREE");
+        	session.put("refereeListResult", this.getRefereeList());
+        	session.put("refereeLastSearch", refereeSearchText); // Para mostrar en el cuadro de búsqueda el valor de la última búsqueda
+        	session.put("refereeFlag", true); // Para que no se vuelva a recargar la página automáticamente (Interruptor)
+        	
+        	return SUCCESS;
+        } catch (Exception e) {
+        	return ERROR;
+        }
+    }
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public String modifyReferee() throws Exception {
+		LOGGER.debug("Execute modifyReferee");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		
+		try {
+			if (null != session.get("refereeReadOnly") && !(boolean) session.get("refereeReadOnly")) {
+				updateReferee(this.referee); // Actualizar árbitro
+				
+				session.put("refereeReadOnly", true); // Valor para controlar los campos de sólo lectura y que puedan ser desbloqueados al Modificar el árbitro
+				session.put("refereeModifyFlag", false); // Interruptor de modificación de árbitro
+				session.put("refereeCssClassTextField", CLASS_READ_ONLY); // Clase de estilos para visualizar campos de sólo lectura
+			} else {
+				session.put("refereeReadOnly", false); // Valor para controlar los campos de sólo lectura y que puedan ser desbloqueados al Modificar el árbitro
+				session.put("refereeModifyFlag", true); // Interruptor de modificación de árbitro
+				session.put("refereeCssClassTextField", CLASS_CAN_WRITE); // Clase de estilos para visualizar campos que se puedan modificar
+			}
+			
+			return SUCCESS;
+		} catch (Exception e) {
+			return ERROR;
+		}
+	}
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public String refereeFormReset() throws Exception {
+		LOGGER.debug("Execute refereeFormReset");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		
+		try {
+			session.put("context", new Date());
+			session.remove("activeLink");
+			session.put("activeLink", "REFEREE");
+			session.remove("refereeListResult");
+			session.remove("refereeLastSearch");
+			session.remove("refereeFlag");
+			session.put("refereeFlag", false);
+			
+			return SUCCESS;
+		} catch (Exception e) {
+			return ERROR;
+		}
+	}
+	
+	/**
+	 * @return
+	 * @throws Exception
+	 */
+	public String searchReferee() throws Exception {
+		LOGGER.debug("Execute searchReferee");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		
+		try {
+			// Cargar información
+			if (null != this.referee.getId()) {
+				this.referee = this.refereeDAO.getReferee(this.referee.getId());
+				if (null != this.referee) {	// Buscar árbitro
+					// Buscar temporadas by refereeId
+					this.seasonsList = new ArrayList<Season>();
+					//seasonsList = seasonDAO.getSeasonList(this.referee); // TODO subbúsquedas
+					this.seasonsList = seasonDAO.getSeasonList();
+					if (null != seasonsList && seasonsList.size() > 0) {
+						session.put("seasonsList", seasonsList);
+					} else {
+						session.remove("seasonsList");
+					}
+					
+					// Buscar partidos, competiciones, temporadas... 
+					session.put("context", new Date());
+					session.remove("activeLink");
+					session.put("activeLink", "REFEREE_INFO");
+					session.remove("refereeResult");
+					session.put("refereeResult", this.referee);
+					session.put("refereeFlag", false);
+					session.put("refereeReadOnly", true); // Valor para controlar los campos de sólo lectura y que puedan ser desbloqueados al Modificar el árbitro
+					session.put("refereeCssClassTextField", CLASS_READ_ONLY); // Clase de estilos para visualizar campos de sólo lectura
+					
+					return SUCCESS;			
+				} else {
+					return ERROR;
+				}
+			} else {
+				return ERROR;
+			}
+		} catch (Exception e) {
+			return ERROR;
+		}
+	}
+	
+	/**
+	 * @param referee
+	 */
+	private void updateReferee(Referee referee) {
+		LOGGER.debug("Execute updateReferee");
+		
+		try {
+			refereeDAO.updateReferee(referee);
+		} catch (Exception e) {
+			
+		}
+		LOGGER.debug("End updateReferee");
+	}
+
+	/**
+	 * @return the refereeDAO
+	 */
+	public RefereeDAO getRefereeDAO() {
+		return refereeDAO;
+	}
+
+	/**
+	 * @param refereeDAO the refereeDAO to set
+	 */
+	public void setRefereeDAO(RefereeDAO refereeDAO) {
+		this.refereeDAO = refereeDAO;
+	}
+
+	/**
+	 * @return the referee
+	 */
+	public Referee getReferee() {
+		return referee;
+	}
+
+	/**
+	 * @param referee the referee to set
+	 */
+	public void setReferee(Referee referee) {
+		this.referee = referee;
+	}
+
+	/**
+	 * @return the refereeList
+	 */
+	public List<Referee> getRefereeList() {
+		return refereeList;
+	}
+
+	/**
+	 * @param refereeList the refereeList to set
+	 */
+	public void setRefereeList(List<Referee> refereeList) {
+		this.refereeList = refereeList;
+	}
+
+	/**
+	 * @return the refereeSearchText
+	 */
+	public String getRefereeSearchText() {
+		return refereeSearchText;
+	}
+
+	/**
+	 * @param refereeSearchText the searchText to set
+	 */
+	public void setRefereeSearchText(String refereeSearchText) {
+		this.refereeSearchText = refereeSearchText;
+	}
+	
+	/**
+	 * @return the seasonDAO
+	 */
+	public SeasonDAO getSeasonDAO() {
+		return seasonDAO;
+	}
+
+	/**
+	 * @param seasonDAO the seasonDAO to set
+	 */
+	public void setSeasonDAO(SeasonDAO seasonDAO) {
+		this.seasonDAO = seasonDAO;
+	}
+
+	/**
+	 * @return the seasonsList
+	 */
+	public List<Season> getSeasonsList() {
+		return seasonsList;
+	}
+
+	/**
+	 * @param seasonsList the seasonsList to set
+	 */
+	public void setSeasonsList(List<Season> seasonsList) {
+		this.seasonsList = seasonsList;
+	}
+	
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.ataf.entities">
+    <class name="Referee" table="REFEREE">
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="NAME" />
+        <property name="surname" column="SURNAME" />
+        <property name="dni" column="DNI" />
+        <property name="birthdate" column="BIRTHDATE" type="date" />
+        <property name="address" column="ADDRESS" />
+        <property name="city" column="CITY" />
+        <property name="country" column="COUNTRY" />
+        <property name="alias" column="ALIAS" />
+    </class> 
+</hibernate-mapping>

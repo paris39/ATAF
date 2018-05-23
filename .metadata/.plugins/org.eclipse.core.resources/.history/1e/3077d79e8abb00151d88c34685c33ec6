@@ -1,0 +1,93 @@
+/**
+ * 
+ */
+package org.ataf.persistence.dao.impl;
+
+import java.util.List;
+
+import org.ataf.entities.User;
+import org.ataf.persistence.dao.interfaces.UserDAO;
+import org.ataf.utils.Util;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
+/**
+ * @author javier.paris
+ */
+public class UserDAOImpl implements UserDAO {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOImpl.class);
+	private SessionFactory sessionFactory;
+	
+	/**
+	 * Constructor
+	 */
+	public UserDAOImpl() {
+		super();
+	}
+
+	/**
+	 * @param sessionFactory
+	 */
+	public UserDAOImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	@Transactional
+	public User checkLogin(User user) {
+		try {
+			// Búsqueda en base de datos del usuario que corresponda con el alias introducido
+			User userFound = (User) sessionFactory.getCurrentSession()
+	                .createCriteria(User.class).add(Restrictions.eq("alias", user.getAlias()))
+	                .setFetchMode("roles", FetchMode.JOIN).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+	                .uniqueResult();
+//			userFound.getRoles().isEmpty(); // Acceso obligatorio al Set ya que si se accede a él desde otro lado pierde la conexión
+			return userFound;
+		} catch (Exception e) {
+			return user;
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<User> getUserList() {
+		 @SuppressWarnings("unchecked")
+		 List<User> listUser = (List<User>) sessionFactory.getCurrentSession()
+                .createCriteria(User.class)
+                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+ 
+        return listUser;
+	}
+
+	@Override
+	@Transactional
+	public boolean newUser(User user) {
+		LOGGER.info("Encrypting password");
+		user.setPassword(Util.cryptMD5(user.getPassword()));
+		try {
+			sessionFactory.getCurrentSession().save(user);
+			sessionFactory.getCurrentSession().getTransaction().commit();
+			LOGGER.info("Correct save");
+			return true;
+		} catch (HibernateException e) {
+			sessionFactory.getCurrentSession().getTransaction().rollback();
+			LOGGER.error("Incorrect save", e);
+			return false;
+		}
+	}
+
+	@Override
+	@Transactional
+	public List<User> getUserList(String userSearchText) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

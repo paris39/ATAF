@@ -1,0 +1,111 @@
+/**
+ * 
+ */
+package org.ataf.actions;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.ataf.entities.Language;
+import org.ataf.persistence.dao.interfaces.LanguageDAO;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
+/**
+ * @author javier.paris
+ */
+public class IndexAction extends ActionSupport {
+	private static final long serialVersionUID = -7999631997843774149L;
+	
+	// Estáticos
+	private static final Logger LOGGER = LoggerFactory.getLogger(IndexAction.class);
+	private static final String SUCCESS = "SUCCESS";
+	private static final String DEFAULT_LANG = "es_ES";
+	
+	// DAOs
+	private LanguageDAO languageDAO;
+	
+	// Listados y objetos
+	private Language language;
+	private List<Language> languageList;
+	
+	/* (non-Javadoc)
+	 * @see com.opensymphony.xwork2.ActionSupport#execute()
+	 */
+	public String getLanguages() throws Exception {
+		LOGGER.debug("Execute RefereeAction");
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		
+		try {
+			// Buscar idiomas disponibles en la aplicación
+			this.languageList = new ArrayList<Language>();
+			//seasonsList = seasonDAO.getSeasonList(this.referee); TODO
+			this.languageList = languageDAO.getLanguageList();
+			if (null != languageList && languageList.size() > 0) {
+				session.put("languageFlag", true);
+				session.put("languageList", languageList);
+				for (Language languageAux : languageList) { // Buscando el idioma por defecto para ponerle seleccionado
+					if (DEFAULT_LANG.equalsIgnoreCase(languageAux.getCode())) {
+						session.put("defaultLang", languageAux.getId());
+						session.put("languageSelected", languageAux.getCode());
+					}
+				}
+			} else {
+				session.remove("defaultLang");
+				session.remove("languageFlag");
+				session.remove("languageList");
+			}
+			
+			return SUCCESS;
+		} catch (Exception e) {
+			return ERROR;
+		}
+	}
+
+	/**
+	 * @return the language
+	 */
+	public Language getLanguage() {
+		return language;
+	}
+
+	/**
+	 * @param language the language to set
+	 */
+	public void setLanguage(Language language) {
+		this.language = language;
+	}
+
+	/**
+	 * @return the languageList
+	 */
+	public List<Language> getLanguageList() {
+		return languageList;
+	}
+
+	/**
+	 * @param languageList the languageList to set
+	 */
+	public void setLanguageList(List<Language> languageList) {
+		this.languageList = languageList;
+	}
+
+	/**
+	 * @return the languageDAO
+	 */
+	public LanguageDAO getLanguageDAO() {
+		return languageDAO;
+	}
+
+	/**
+	 * @param languageDAO the languageDAO to set
+	 */
+	public void setLanguageDAO(LanguageDAO languageDAO) {
+		this.languageDAO = languageDAO;
+	}
+	
+}

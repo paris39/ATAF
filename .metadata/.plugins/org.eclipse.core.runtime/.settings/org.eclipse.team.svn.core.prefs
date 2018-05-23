@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+externalMigrateFromAuthorizationDatabase/isMigrated=true
+migrateFromAuthorizationDatabase/isMigrated=true
+repositories/c0692ac1768c0015151ef798fd919bc0=c0692ac1768c0015151ef798fd919bc0;http\://svn-vass/ISBAN_ECM/Widgets;http\://svn-vass/ISBAN_ECM/Widgets;branches;tags;trunk;true;175da9fe-8132-4ed4-8c67-e9cd786e99fa;http\://svn-vass/ISBAN_ECM;;false;;;0
+repositories/e0815054768c0015151ef798fd919bc0=e0815054768c0015151ef798fd919bc0;http\://svn-vass/ISBAN_ECM/Java;http\://svn-vass/ISBAN_ECM/Java;branches;tags;trunk;true;175da9fe-8132-4ed4-8c67-e9cd786e99fa;http\://svn-vass/ISBAN_ECM;;false;;;0

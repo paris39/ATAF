@@ -1,0 +1,54 @@
+/**
+ * 
+ */
+package org.ataf.persistence.dao.interfaces;
+
+import java.util.List;
+
+import org.ataf.entities.User;
+
+/**
+ * @author javier.paris
+ */
+public interface UserDAO {
+	
+	/**
+	 * Función que comprueba las credenciales para loguearse en la aplicación
+	 * 
+	 * @param user name/password
+	 * @return completed User
+	 */
+	public User checkLogin (User user);
+	
+	/**
+	 * Función para añadir un nuevo usuario
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public boolean newUser (User user);
+	
+	/**
+	 * Listado de todos los usuarios
+	 * 
+	 * @return Lista de todos los usuarios de la aplicación
+	 */
+	public List<User> getUserList();
+	
+	/**
+	 * @param userSearchText
+	 * @return Lista de los usuarios encontrados mediante el parámetro
+	 */
+	public List<User> getUserList(String userSearchText);
+	
+	/**
+	 * @param id
+	 * @return Objeto de usuario
+	 */
+	public User getUser(Long id);
+	
+	/**
+	 * @param user
+	 */
+	public void updateUser(User user);
+}

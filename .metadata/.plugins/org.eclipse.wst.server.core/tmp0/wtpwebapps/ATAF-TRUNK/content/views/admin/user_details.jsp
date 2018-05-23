@@ -1,0 +1,95 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<s:set var="userCancelModify" value="getText('user.CancelModify')" />
+<s:set var="userCancelModifyMessage" value="getText(\'user.cancelModifyMessage\')" />
+<s:set var="userCssClassTextField" value="#session.userCssClassTextField" />
+<s:set var="userFlag" value="#session.userFlag" />
+<s:set var="userModifyFlag" value="#session.userModifyFlag" />
+<s:set var="userReadOnly" value="#session.userReadOnly" />
+<s:set var="userResult" value="#session.userResult" />
+<s:set var="userUpdateMessage" value="getText(\'user.updateMessage\')" />
+<s:set var="sessionAdmin" value="#session.admin" />
+<s:set var="sessionUser" value="#session.user" />
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" />
+		<title>Usuarios</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script type="text/javascript" language="JavaScript">
+		    /* Función que mediante el flag de modificar muestra un mensaje de confirmación a la hora de modificar un usuario */
+    		function confirmUserUpdate(userModifyFlag, message) {
+    			if (null != userModifyFlag && "true" == userModifyFlag) {
+					if (confirm(message)) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			} // End function
+			
+			/* Función que cancela la modificación de usuario */
+			function cancelModifyUser(message) {
+				if (confirm(message)) {
+					document.forms["cancelModifyUserForm"].submit(); // Formulario de cancelación de modificación de usuario
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<s:if test="%{(null != #sessionUser) && (#sessionAdmin)}">
+			<s:div id="userInfo" class="tableInfo">
+				<fieldset class="">
+					<legend>
+						<s:property value='getText(\"user.PersonalData\")' />
+					</legend>
+					<s:form id="modifyUserForm" name="modifyUserForm" action="modifyUser.action" method="post" theme="simple" onsubmit="return confirmUserUpdate('%{#userModifyFlag}', '%{#userUpdateMessage}')">
+						<s:div class="personalDataDivReadOnly personalDataIdDiv"> <!--  ID -->
+							<span>
+								<s:property value='getText(\"user.ID_points\")' />
+							</span>
+							<s:textfield id="userIdTextfield" name="user.id" cssClass="sTextfield" label='%{getText("user.ID")}' value="%{#userResult.id}" readonly="true" />
+						</s:div>
+						<s:div class="personalDataDivReadOnly"> <!-- ALIAS -->
+							<span>
+								<s:property value='getText(\"user.Alias_points\")' />
+							</span>
+							<s:textfield id="userAliasTextfield" name="user.alias" cssClass="sTextfield" label='%{getText("user.Alias")}' value="%{#userResult.alias}" readonly="true" />
+						</s:div>
+						<s:div class="%{#userCssClassTextField}"> <!-- APELLIDOS -->
+							<span>
+								<s:property value='getText(\"user.Surname_points\")' />
+							</span>
+							<s:textfield id="userSurnameTextfield" name="user.surname" cssClass="sTextfield" label='%{getText("user.Surname")}' value="%{#userResult.surname}" readonly="%{#userReadOnly}" />
+						</s:div>
+						<s:div class="%{#userCssClassTextField}"> <!-- NOMBRE -->
+							<span>
+								<s:property value='getText(\"user.Name_points\")' />
+							</span>
+							<s:textfield id="userNameTextfield" name="user.name" cssClass="sTextfield" label='%{getText("user.Name")}' value="%{#userResult.name}" readonly="%{#userReadOnly}" />
+						</s:div>
+						<s:div class="%{#userCssClassTextField}"> <!-- ACTIVO -->
+							<span>
+								<s:property value='getText(\"user.Active_points\")' />
+							</span>
+							<s:checkbox id="userActiveCheckBox" name="user.active" cssClass="sCheckbox" label='%{getText("user.Active")}' value="%{#userResult.active}" disabled="%{#userReadOnly}" />
+						</s:div>
+						<s:div class="modifyUserDiv">  <!-- MODIFICAR o GUARDAR USUARIO -->
+							<s:if test="%{(null != #userModifyFlag && #userModifyFlag)}">
+								<s:submit cssClass="sButton" id="buttonSaveModifiedUser" name="buttonModifiedUser" title="%{getText('user.Save_points') + ' ' + #userResult.alias}" value="%{getText('Save')}" />
+								<a href="#" onclick="cancelModifyUser('<s:property value='#userCancelModifyMessage'/>')" class="sButton" title="<s:property value='#userCancelModify'/>" id="buttonLink">
+									<s:property value="%{getText('Cancel')}" />
+								</a>
+							</s:if>
+							<s:else>
+								<s:submit cssClass="sButton" id="buttonModifyUser" name="buttonModifyUser" title="%{getText('user.Modify_points') + ' ' + #userResult.alias}" value="%{getText('Modify')}" />
+							</s:else>
+						</s:div>
+				    </s:form>
+				    <s:form name="cancelModifyUserForm" id="cancelModifyUserForm" action="cancelModifyUser.action" method="post" theme="simple" />
+				</fieldset>
+			</s:div>
+		</s:if>
+	</body>
+</html>

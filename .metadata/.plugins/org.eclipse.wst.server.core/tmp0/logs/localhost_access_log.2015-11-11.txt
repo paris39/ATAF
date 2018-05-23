@@ -1,0 +1,11 @@
+127.0.0.1 - - [11/Nov/2015:12:13:06 +0100] "GET / HTTP/1.1" 404 1004
+127.0.0.1 - - [11/Nov/2015:12:20:19 +0100] "GET /ATAF/ HTTP/1.1" 404 1014
+127.0.0.1 - - [11/Nov/2015:12:24:12 +0100] "GET / HTTP/1.1" 404 1004
+127.0.0.1 - - [11/Nov/2015:12:37:02 +0100] "GET /ATAF/ HTTP/1.1" 200 3680
+127.0.0.1 - - [11/Nov/2015:12:37:02 +0100] "GET /ATAF/content/css/styles.css HTTP/1.1" 200 16321
+127.0.0.1 - - [11/Nov/2015:12:37:03 +0100] "GET /ATAF/content/views/welcome.jsp HTTP/1.1" 200 894
+127.0.0.1 - - [11/Nov/2015:12:37:03 +0100] "GET /css/styles.css HTTP/1.1" 404 1032
+127.0.0.1 - - [11/Nov/2015:12:37:03 +0100] "GET /ATAF/content/img/url.jpg HTTP/1.1" 200 11170
+127.0.0.1 - - [11/Nov/2015:12:39:20 +0100] "POST /ATAF/login.action HTTP/1.1" 200 3749
+127.0.0.1 - - [11/Nov/2015:12:39:20 +0100] "GET /ATAF/content/views/welcome.jsp HTTP/1.1" 200 894
+127.0.0.1 - - [11/Nov/2015:12:39:20 +0100] "GET /css/styles.css HTTP/1.1" 404 1032

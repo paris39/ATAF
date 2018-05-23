@@ -1,0 +1,764 @@
+@charset "utf-8";
+
+/* CUERPO */
+body {
+	background-image: url("../img/panel-azulejos.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	height: auto;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: auto;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.mainContainer {
+	background-color: lightBlue;
+	border-color: navy;
+	border-style: solid;
+	border-width: 2px;
+	border-top-width: 0px;
+	/*
+	border-left-color: mediumVioletRed;
+	border-left-style: solid;
+	border-left-width: 1px;
+	border-right-color: mediumVioletRed;
+	border-right-style: solid;
+	border-right-width: 1px;
+	*/
+	font-family: candara;
+	height: 100%;
+	min-height: 420px !important;
+	margin: auto;
+	margin-top: 0;
+	padding: 0;
+	padding-bottom: 10px;
+	/*text-align: center;*/
+	width: 1000px !important;
+	max-width: 1000px;
+	min-width: 1000px;
+}
+
+/* TÍTULO PRINCIPAL*/
+.mainContainer .mainTitle {
+	background-image: url("../img/ceramica_alfar.jpg");
+	background-position: center;
+	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	clear: both;
+	height: auto;
+	min-height: 125px !important;
+	text-align: center;
+	vertical-align: middle;
+	width: 100%;
+}
+
+.mainContainer .mainTitle .mainTitleLogo {
+	float: left;
+	height: 125px !important;
+	width: auto;
+}
+.mainContainer .mainTitle .mainTitleLogo a {
+	text-decoration: none;	
+}
+.mainContainer .mainTitle .mainTitleLogo a:hover span {
+	display: block;
+	text-decoration: none;
+	text-shadow: 2px 2px mediumblue;
+}
+.mainContainer .mainTitle .mainTitleLogo span {
+	color: navy;
+	cursor: pointer;
+	display: block;
+	font-family: AR BERKLEY;
+	font-size: 80px;
+	font-weight: bold;
+	padding: 5px;
+	padding-bottom: 25px;
+	padding-left: 20px;
+	padding-right: 35px;
+	text-align: center;
+	text-shadow: 2px 2px white;
+}
+
+.mainContainer .mainTitle .mainSubtitleLogo {
+	border-style: none;
+	border-width: thin;
+	border-right-color: navy;
+	border-right-style: none;
+	border-right-width: 1px;
+	/* border-style: solid;
+	border-width: thin; */
+	float: left;
+	height: 81px;
+	padding: 9px;
+	padding-top: 35px;
+	width: 557px !important;
+}
+.mainContainer .mainTitle .mainSubtitleLogo span {
+	color: navy;
+	cursor: default;
+	font-family: AR BERKLEY;
+	font-size: 29px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 2px 2px white;
+}
+.mainContainer .mainTitle .mainSubtitleLanguage {
+	margin-bottom: 3px;
+	text-align: right;
+}
+.mainContainer .mainTitle .mainSubtitleLanguage span {
+	font-weight: bold;
+	text-shadow: 1px 1px grey;
+}
+
+/* MENÚ PRINCIPAL */
+.mainContainer .mainMenu {
+	border-style: none;
+	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	clear: both;
+	cursor: default;
+	height: auto;
+	width: auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* Enlaces del menú principal */
+.mainContainer .mainMenu a {
+	font-family: candara;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+/* ELEMENTOS DEL LOGIN DE MENÚ PRINCIPAL */
+.mainContainer .mainMenu .mainMenuLoginElement {
+	background-color: navy;
+	border-style: none;
+/* 	border-bottom-color: black;
+	border-bottom-style: solid;
+	border-bottom-width: 1px; */
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 2px;
+	clear: both;
+	display: block;
+	/* float: left; */
+	height: 27px !important;
+	max-height: auto;
+	padding-top: 1px;
+	width: 100%; /* Variable según el número de elementos */
+}
+.mainContainer .mainMenu .mainMenuLoginElement span {
+	color: white;
+	cursor: default;
+	font-family: candara;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px black;
+}
+.mainContainer .mainMenu .mainMenuLoginElement span.loginError {
+	color: red;
+	cursor: default;
+	font-family: candara;
+	font-weight: bold;
+	text-align: right;
+	text-shadow: 1px 1px darkRed;
+	width: 100%;
+}
+.mainContainer .mainMenu .mainMenuLoginElement input {
+	border-radius: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: candara;
+	font-weight: bold;
+}
+.mainContainer .mainMenu .mainMenuLoginElement input[type=submit] {
+	background: linear-gradient(to right, silver, grey);
+	color: black;
+	font-family: candara;
+	font-weight: bold;
+	min-height: 24px;
+	min-width: 75px;
+	text-align: center;
+	text-shadow: 1px 1px grey;
+	width: auto;
+}
+.mainContainer .mainMenu .mainMenuLoginElement input[type=submit]:hover {
+	/*background-color: navy;*/
+	background: linear-gradient(to right, navy, black);
+	color: white;
+	cursor: pointer;
+	text-shadow: 1px 1px black;
+}
+/* Enlace Administrador */
+.mainContainer .mainMenu .mainMenuAdminElement {
+	background-color: gold;
+	border-style: none;
+ 	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 1px;
+	float: left;
+	/* float: left; */
+	height: 27px !important;
+	/* max-height: auto; */
+	/*padding-top: 2px;*/
+	width: 499px !important; /* Variable según el número de elementos */
+}
+.mainContainer .mainMenu .mainMenuAdminElement span {
+	height: 27px !important;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuAdminElement a {
+	color: black;
+	display: block;
+	height: 100%;
+	padding-top: 2px;
+	text-shadow: 1px 1px grey;
+	vertical-align: middle;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuAdminElement a:hover {
+	/*background-color: navy;*/
+	background: linear-gradient(to right, navy, black);
+	border-color: white;
+	border-style: outset;
+	border-width: thin; 
+	color: white;
+	display: block;
+	padding-top: 1px;
+	text-shadow: 1px 1px black;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuLogedElement span {
+	color: navy;
+	cursor: default;
+	font-family: candara;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px black;
+}
+.mainContainer .mainMenu .mainMenuLogedElement input {
+	border-radius: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: candara;
+}
+.mainContainer .mainMenu .mainMenuLogedElement input[type=submit] {
+	background: linear-gradient(to right, silver, grey);
+	color: black;
+	font-family: candara;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px grey;
+}
+.mainContainer .mainMenu .mainMenuLogedElement input[type=submit]:hover {
+	/*background-color: navy;*/
+	background: linear-gradient(to right, navy, black);
+	color: white;
+	cursor: pointer;
+	text-shadow: 1px 1px black;
+}
+
+/* Menú principal cuando un usuario se ha registrado */
+.mainContainer .mainMenu .mainMenuLogedElement {
+	background-color: blue;
+	border-style: none;
+ 	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 1px;
+	float: left;
+	display: block;
+	/* float: left; */
+	height: 25px !important;
+	max-height: auto;
+	padding-top: 2px;
+	width: 499px !important; /* Variable según el número de elementos */
+}
+.mainContainer .mainMenu .mainMenuLogedElement span {
+	color: white;
+	cursor: default;
+	font-family: candara;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px black;
+	width: 100%;
+}
+
+.mainContainer .mainMenu .mainMenuLogedElement a {
+	background-color: LightBlue;
+	color: black;
+	display: block;
+	text-shadow: 1px 1px grey;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuLogedElement a:hover {
+	background-color: navy;
+	border-style: outset;
+	border-width: thin;
+	color: white;
+	display: block;
+	height: 19px;
+	text-shadow: 1px 1px black;
+	width: 100%;	
+}
+
+/* ELEMENTOS DEL MENÚ PRINCIPAL */
+.mainContainer .mainMenu .mainMenuElement {
+	border-style: none;
+	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 1px;
+	display: block;
+	float: left;
+	height: 20px !important;
+	max-height: 20px !important;
+	text-align: center;
+	width: 249px; /* Variable según el número de elementos */
+}
+
+.mainContainer .mainMenu .mainMenuElement a {
+	/*background-color: LightBlue;*/
+	background: linear-gradient(to right, silver, grey);
+	color: black;
+	display: block;
+	text-shadow: 1px 1px grey;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuElement a:hover {
+	/*background-color: navy;*/
+	background: linear-gradient(to right, navy, black);
+	border-style: outset;
+	border-width: thin;
+	color: white;
+	display: block;
+	height: 19px;
+	text-shadow: 1px 1px black;
+	width: 100%;	
+}
+.mainContainer .mainMenu .mainMenuElement a:active {
+	background: linear-gradient(to right, lightBlue, navy);
+	color: gold;
+	display: block;
+	border-color: navy;
+	border-style: inset;
+	border-width: thin;
+	height: 19px;
+	text-shadow: 1px 1px navy;
+}
+
+/* Menú administrador */
+.mainContainer .mainMenu .manageMenuElement {
+	border-style: none;
+	border-bottom-color: navy;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 1px;
+	/*display: block;*/
+	float: left;
+	height: auto;
+	text-align: center;
+	width: 999px !important; /* Variable según el número de elementos */
+}
+
+.mainContainer .mainMenu .manageMenuElement a {
+	background-color: LightBlue;
+	color: navy;
+	display: block;
+	text-shadow: 1px 1px aqua;
+	width: 100%;
+}
+.mainContainer .mainMenu .manageMenuElement a:hover {
+	background-color: navy;
+	color: white;
+	display: block;
+	text-shadow: 1px 1px black;
+	width: 100%;
+}
+
+/* ELEMENTOS DEL MENÚ PRINCIPAL */
+.mainContainer .mainMenu .mainMenuLogedElement span.userLoged {
+	font-style: italic;
+}
+
+/* CUERPO DE LA WEB */
+.mainContainer .webBody {
+	border-style: none;
+	border-right-color: navy;
+	border-right-style: solid;
+	border-right-width: 1px;
+	border-top-color: navy;
+	border-top-style: solid;
+	border-top-width: 1px;
+	clear: both;
+	display: block;
+	float: inherit;
+	height: auto;
+	vertical-align: middle;
+	width: 100%;
+}
+/* Imagen del cuerpo */
+.mainContainer .webBody .imgBody {
+	float: left;
+	height: auto;
+	max-height: 256px !important;
+	width: auto;
+	max-width: 256px !important;
+}
+/* Imagen del cuerpo */
+.mainContainer .webBody .imgBody img {
+	height: auto;
+	max-height: 256px !important;
+	width: auto;
+	max-width: 256px !important;
+}
+/* Texto del cuerpo */
+.mainContainer .webBody .textBody {
+	background-color: window;
+	float: left;
+	height: 176px;
+	max-height: 256px !important;
+	padding-top: 80px;
+	width: auto;
+	min-width: 744px !important;
+}
+.mainContainer .webBody .textBody .slogan {
+	color: navy;
+	cursor: default;
+	display: block;
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 2px black;
+}
+.mainContainer .webBody .textBody .contact {
+	color: black;
+	cursor: default;
+	display: block;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.sButton, .sButton a {
+	background: linear-gradient(to right, silver, grey);
+	border-color: white;
+	border-radius: 10px;
+	border-style: outset;
+	border-width: 2px;
+	color: black;
+	float: right;
+	font-family: candara;
+	font-size: 14px;
+	font-weight: bold;
+	height: 24px;
+	margin: 5px;
+	min-width: 76px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 1px 1px grey;
+	/*vertical-align: middle;*/
+}
+.sButton:active, .sButton a:active, .adminLinks a:active {
+	border-style: inset;
+}
+#buttonLink {
+	height: 19px;
+	padding-top: 2px;
+}
+.adminLinks {
+	height: 19px;
+	float: left;
+	padding-top: 2px;
+	width: 150px;	
+}
+/*
+#buttonLink:ACTIVE {
+	border-style: inset;
+} */
+.sButton:hover {
+	/*background-color: navy;*/
+	background: linear-gradient(to right, navy, black);
+	color: white;
+	cursor: pointer;
+	text-decoration: none;
+	text-shadow: 1px 1px black;
+}
+
+/* REFEREES, USER */
+.searcher {
+	height: auto;
+	margin: auto;
+	margin-top: 5px;
+	text-align: center;
+	width: 100%;
+}
+.searcher .searchMenu {
+	background-color: aqua;
+	border-color: navy;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: thin;
+	clear: both;
+	height: 50px;
+	margin: auto;
+	padding: 5px;
+	text-align: center;
+	width: 290px;
+}
+.searcher .searchMenu .sTextfield {
+	border-radius: 10px;
+	font-family: candara;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.searcher .searchMenu label[for="refereeSearchText"], .searcher .searchMenu span {
+	border-radius: 10px;
+	cursor: default;
+	font-family: candara;
+	font-weight: bold;	
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	text-shadow: 1px 1px grey;
+}
+.searcher .searchResults {
+	background-color: aqua;
+	border-color: navy;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: thin;
+	clear: both;
+	height: auto;
+	margin: auto;
+	margin-top: 5px;
+	padding: 5px;
+	text-align: center;
+	width: 970px !important;
+}
+.searcher .searchResults table {
+	border-collapse: collapse;
+/* 	border-color: navy;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: thin; */
+	margin: auto;
+	text-align: center;
+	width: 100%;
+}
+.searcher .searchResults table tr {
+	padding: 5px;
+	vertical-align: middle;
+}
+.searcher .searchResults table tr th {
+	background-color: silver;
+	border-color: navy;
+	border-bottom-style: solid;
+	border-width: thin;
+	padding: 4px;
+	text-decoration: underline;
+}
+.searcher .searchResults table tr .thBottom {
+	background-color: silver;
+	border-color: navy;
+	border-bottom-style: none;
+	border-top-style: solid;
+	border-width: thin;
+	padding: 2px;
+	text-decoration: none;
+}
+.searcher .searchResults table tr td {
+	border-color: navy;
+	border-style: none;
+	border-width: thin;
+	padding: 5px;
+}
+.searcher .searchResults table .oddRow td {
+	background-color: white;
+}
+.searcher .searchResults .sButton {
+	float: none;
+	margin: auto;
+}
+
+fieldset {
+	/* background-color: white; */
+	border-color: navy;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: thin;
+}
+fieldset legend {
+	font-weight: bold;
+	text-align: left;
+	text-shadow: 1px 1px grey;
+}
+
+.tableInfo {
+	background-color: lightBlue;
+	height: auto;
+	margin: auto;
+	margin-top: 5px;
+	/*text-align: center;*/
+	width: 100%;
+}
+.tableInfo span {
+	margin-bottom: 5px; 
+	margin-right: 5px;
+}
+.tableInfo .personalDataDiv {
+	float: left;
+	text-align: left;
+}
+.tableInfo .personalDataDivReadOnly {
+	float: left;
+	text-align: left;
+}
+.tableInfo .personalDataIdDiv .sTextfield {
+	text-align: right;
+	width: 35px;
+}
+.tableInfo .personalDataBirthdateDiv .sTextfield {
+	text-align: right;
+	width: 70px;
+}
+.tableInfo .personalDataFieldset {
+	float: left;
+}
+.tableInfo .personalDataSpan {
+	float: left;
+}
+.tableInfo .personalDataDiv .sTextfield {
+	background-color: white;
+	border-radius: 10px;
+	color: black;
+	font-family: candara;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-right: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	min-width: 50px;
+	max-width: 300px;
+}
+.tableInfo .personalDataDivReadOnly .sTextfield {
+	background-color: Gainsboro;
+	border-radius: 10px;
+	color: DarkSlateGray;
+	font-family: candara;
+	font-weight: bold;
+	margin-bottom: 5px;
+	margin-right: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	min-width: 50px;
+	max-width: 300px;
+}
+
+/* REFEREE DETAILS */
+.tableInfo .refereeDataDivRight {
+	clear: both;
+	display: block;
+	float: right;
+	text-align: right;
+	width: 100%;
+}
+.tableInfo .refereeDataDivRight .seasonSpan {
+	margin-right: 5px;
+	text-align: right;
+}
+
+/* USER DETAILS */
+.tableInfo .userDataDivRight {
+	clear: both;
+	display: block;
+	float: right;
+	text-align: right;
+	width: 100%;
+}
+.tableInfo .userDataDivRight .seasonSpan {
+	margin-right: 5px;
+	text-align: right;
+}
+
+.sSelect {
+	border-radius: 10px;
+	cursor: pointer;
+	font-family: candara;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 150px;
+	
+	background:
+	    linear-gradient(45deg, transparent 50%, black 50%),
+	    linear-gradient(135deg, black 50%, transparent 50%),
+	    linear-gradient(45deg, transparent 50%, grey 50%),
+	    linear-gradient(135deg, grey 50%, transparent 50%),
+	    linear-gradient(to right, silver, grey);
+	background-color: white;
+  	background-position:
+	    calc(100% - 18px) calc(8px),
+	    calc(100% - 14px) calc(8px),
+	    calc(100% - 16px) calc(9px),
+	    calc(100% - 12px) calc(9px),
+	    100% 0;
+	background-repeat: no-repeat;
+	background-size:
+	    5px 5px,
+	    5px 5px,
+	    5px 5px,
+	    5px 5px,
+	    2.5em 2.5em;
+
+  	/* styling and reset */
+	border: 2px inset silver;
+	line-height: 1.5em;
+	/*padding: 0.5em 3.5em 0.5em 1em;*/
+
+  	/* reset */
+	margin: 0;      
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.sSelect:hover {
+	background:
+	    linear-gradient(45deg, transparent 50%, white 50%),
+	    linear-gradient(135deg, white 50%, transparent 50%),
+	    linear-gradient(45deg, transparent 50%, black 50%),
+	    linear-gradient(135deg, black 50%, transparent 50%),
+	    linear-gradient(to right, navy, black);
+	background-color: white;
+	background-position:
+	    calc(100% - 18px) calc(8px),
+	    calc(100% - 14px) calc(8px),
+	    calc(100% - 16px) calc(9px),
+	    calc(100% - 12px) calc(9px),
+	    100% 0;
+	background-repeat: no-repeat;
+	background-size:
+	    5px 5px,
+	    5px 5px,
+	    5px 5px,
+	    5px 5px,
+	    2.5em 2.5em;
+}

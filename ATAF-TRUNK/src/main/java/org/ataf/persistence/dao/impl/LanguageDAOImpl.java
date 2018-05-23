@@ -1,0 +1,61 @@
+/**
+ * 
+ */
+package org.ataf.persistence.dao.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.ataf.entities.Language;
+import org.ataf.persistence.dao.interfaces.LanguageDAO;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
+
+/**
+ * @author javier.paris
+ */
+public class LanguageDAOImpl implements LanguageDAO {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(LanguageDAOImpl.class);
+	private SessionFactory sessionFactory;
+
+	/**
+	 * Constructor
+	 */
+	public LanguageDAOImpl() {
+		super();
+	}
+	
+	/**
+	 * @param sessionFactory
+	 */
+	public LanguageDAOImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Language> getLanguageList() {
+		LOGGER.info("Listing Languages");
+		List<Language> listLanguage = new ArrayList<Language>();
+		try {
+			Order order = Order.asc("name");
+			Criterion criterion = Restrictions.eq("active", true);
+			listLanguage = (List<Language>) sessionFactory.getCurrentSession().createCriteria(Language.class).add(criterion).addOrder(order).list();
+		} catch (Exception e) {
+			// Algún tipo de control de excepción TODO
+		} finally {
+			//sessionFactory.close(); // Cerrando la sesión
+		}
+ 
+		return listLanguage;
+	}
+
+}

@@ -1,0 +1,8 @@
+1447324287057	Encapsulate field 'roles'
+1447326365654	Encapsulate field 'roles'
+1447345477838	Rename type 'Rol'
+1447345488481	Delete element
+1447345499149	Rename resource 'Rol.hbm.xml'
+1447345511126	Rename type 'RolDAOImpl'
+1447345527353	Rename type 'RolDAO'
+1447345588842	Rename local variable 'rolAux'

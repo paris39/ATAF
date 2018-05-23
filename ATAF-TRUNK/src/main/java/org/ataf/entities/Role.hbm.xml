@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.ataf.entities">
+    <class name="Role" table="LOGIN_ROLE">
+    	<meta attribute="class-description">
+        	This class contains the rol records. 
+      	</meta>
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="NAME" />
+        <property name="active" column="ACTIVE" />
+        <set name="users" cascade="save-update" table="USER_ROLE" fetch="select" lazy="true">
+			<key>
+				<column name="ID_ROLE" not-null="false" />
+			</key>
+			<many-to-many entity-name="org.ataf.entities.User">
+				<column name="ID_USER" not-null="false" />
+			</many-to-many>
+		</set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<mvc:annotation-driven />
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<context:component-scan base-package="org.ataf.persistence" />
+	
+	<!-- BEAN ACTIONS -->
+	<bean id="languageActionBean" class="org.ataf.actions.IndexAction">
+        <property name="languageDAO" ref="languageDAO" />
+    </bean>
+    <bean id="loginActionBean" class="org.ataf.actions.LoginAction">
+        <property name="userDAO" ref="userDAO" />
+    </bean>
+    <bean id="refereeActionBean" class="org.ataf.actions.RefereeAction">
+        <property name="refereeDAO" ref="refereeDAO" />
+    </bean>
+<!--     <bean id="seasonActionDAO" class="org.ataf.actions.SeasonAction">
+		<property name="seasonDAO" ref="seasonDAO" />
+	</bean> -->
+    
+    <!-- BEAN DAOs -->
+    <bean id="languageDAO" class="org.ataf.persistence.dao.impl.LanguageDAOImpl">
+    	<constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+    </bean>
+	<bean id="refereeDAO" class="org.ataf.persistence.dao.impl.RefereeDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+	<bean id="seasonDAO" class="org.ataf.persistence.dao.impl.SeasonDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+    <bean id="userDAO" class="org.ataf.persistence.dao.impl.UserDAOImpl">
+	    <constructor-arg>
+	        <ref bean="sessionFactory" />
+	    </constructor-arg>
+	</bean>
+	
+	<!-- OTROS BEANs -->
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<!-- If you have multiple properties file (depending on usecases), 
+		 use 'basenames' property and provide multiple properties file separated by 
+		 comma -->
+		<property name="basename" value="classpath:messages" />
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	    <property name="prefix" value="/WEB-INF/" />
+	    <property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"><!-- destroy-method="close"-->
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost:3306/ataf"/>
+	    <property name="username" value="root"/>
+	    <property name="password" value="root"/>
+	</bean>
+	
+	<bean id="sessionFactory"
+	    class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	    <property name="hibernateProperties">
+		    <value>hibernate.dialect=org.hibernate.dialect.MySQLDialect</value>
+		</property>
+	</bean>
+	
+	<tx:annotation-driven />
+	<bean id="transactionManager"
+	    class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+</beans>
